@@ -218,5 +218,3 @@ All rights reserved.
 ## 👨‍💻 Author
 
 **Shivesh Kumar**
-
-GitHub: https://github.com/kumarshivesh465-hue
