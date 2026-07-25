@@ -6,9 +6,7 @@ FEE_WAIVER_LIMIT = 150.00
 DISPUTE_AUTONOMOUS_LIMIT = 100.00
 
 
-# ---------------------------------------------------------------------------
 # Intent & Entity Agent
-# ---------------------------------------------------------------------------
 def classify_intent(text: str) -> dict:
     t = text.lower()
     if re.search(r"\b(human|agent|person|representative)\b", t):
@@ -35,9 +33,7 @@ def risk_assessment(intent: str) -> dict:
     return {"step_up_required": step_up_required, "risk_tier": "elevated" if step_up_required else "standard"}
 
 
-# ---------------------------------------------------------------------------
 # Domain Resolver Agents
-# ---------------------------------------------------------------------------
 def resolve_lost_stolen() -> dict:
     confidence = 0.97
     return {
@@ -93,13 +89,6 @@ def resolve_dispute(amount: float) -> dict:
     }
 
 
-# ---------------------------------------------------------------------------
-# Explainability Agent
-# Deliberately decoupled from the Resolver Agents above: it only ever
-# receives the resolver's *output*, never its internal logic, so an
-# explanation can never be "reverse engineered" to sound more
-# reasonable than the actual decision was. (PRD section 24)
-# ---------------------------------------------------------------------------
 RATIONALE_TEMPLATES = {
     "CARD_REISSUE": "No fraud signals on the account, identity verified via step-up authentication, "
                      "and this matches the standard reissue policy ({policy}). Sentinel can act autonomously.",
@@ -132,13 +121,6 @@ def explain(action: str, **kwargs) -> str:
         return template
 
 
-# ---------------------------------------------------------------------------
-# Policy Gateway
-# Independent, final-say check — deliberately re-validates hard limits
-# even though the Resolver already applied them, so a bug in a single
-# Resolver Agent can never bypass a compliance boundary. (PRD section 17/27)
-# ---------------------------------------------------------------------------
-def policy_gate(action: str, payload: dict) -> dict:
     if action == "FEE_REVERSAL" and payload.get("amount", 0) > FEE_WAIVER_LIMIT:
         return {"passed": False, "reason": f"amount exceeds FEE-WAIVER-02 hard limit ${FEE_WAIVER_LIMIT:.2f}"}
     if action == "DISPUTE_PROVISIONAL_CREDIT" and payload.get("amount", 0) > DISPUTE_AUTONOMOUS_LIMIT:
@@ -146,9 +128,7 @@ def policy_gate(action: str, payload: dict) -> dict:
     return {"passed": True, "reason": "within policy bounds"}
 
 
-# ---------------------------------------------------------------------------
 # Escalation Agent
-# ---------------------------------------------------------------------------
 def build_escalation_context(session_id: str, transcript_last: str, confidence: float, reason: str) -> dict:
     return {
         "session": session_id,

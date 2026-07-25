@@ -167,8 +167,6 @@ class Handler(BaseHTTPRequestHandler):
         return self.send_json(400, {"error": "unhandled intent"})
 
     def propose(self, session_id, intent, resolution, rationale, risk):
-        # Independent Policy Gateway re-check before we ever tell the customer
-        # an action is possible (PRD section 17/27 — defense in depth).
         gate = agents.policy_gate(resolution["action"], resolution["payload"])
         if not gate["passed"]:
             return self.escalate(session_id, "", resolution["confidence"],
@@ -213,8 +211,6 @@ class Handler(BaseHTTPRequestHandler):
         policy = body.get("policy", "")
         rationale = body.get("rationale", "")
 
-        # Final Policy Gateway check at execution time too — never trust
-        # a client-supplied "confirm" without re-validating server-side.
         gate = agents.policy_gate(action, payload)
         if not gate["passed"]:
             return self.send_json(403, {"error": "Policy Gateway rejected execution: " + gate["reason"]})
