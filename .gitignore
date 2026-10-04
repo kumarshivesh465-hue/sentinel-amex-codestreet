@@ -1,0 +1,34 @@
+# Secrets / environment — never commit these
+.env
+.env.*
+!.env.example
+
+# Local databases and their WAL sidecars
+*.db
+*.db-shm
+*.db-wal
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+.Python
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Build output
+dist/
+build/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp

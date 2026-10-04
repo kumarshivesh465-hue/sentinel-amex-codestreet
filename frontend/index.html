@@ -117,11 +117,85 @@
   .block.broken .b-hash b{color:var(--danger);}
   .block .b-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.6;color:var(--muted);}
   .block.open .b-detail{display:block;}
+  /* Timeline replay */
+  #view-timeline{flex-direction:column;padding:22px 26px;gap:14px;}
+  .tl-head-row{display:flex;justify-content:space-between;align-items:center;}
+  .tl-head-row h2{font-family:var(--display);margin:0 0 4px;font-size:19px;}
+  .tl-head-row button{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:8px 13px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;}
+  .tl-list{position:relative;}
+  .tl-item{display:flex;gap:12px;padding:7px 0;}
+  .tl-dot{width:9px;height:9px;border-radius:50%;background:var(--muted);margin-top:6px;flex-shrink:0;box-shadow:0 0 0 3px var(--bg);}
+  .tl-item.user .tl-dot{background:var(--brand);}
+  .tl-item.agent .tl-dot{background:var(--trust);}
+  .tl-item.system .tl-dot{background:var(--muted);}
+  .tl-item.audit .tl-dot{background:var(--amber);}
+  .tl-body{flex:1;border-left:1px solid var(--line);padding:2px 0 10px 14px;min-width:0;}
+  .tl-head{display:flex;justify-content:space-between;gap:10px;}
+  .tl-kind{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+  .tl-time{font-family:var(--mono);font-size:10.5px;color:var(--muted);}
+  .tl-text{font-size:13px;line-height:1.5;margin-top:3px;word-break:break-word;}
+  .tl-meta{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px;}
+  /* CSAT feedback */
+  .feedback-box{display:flex;align-items:center;gap:8px;align-self:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:12.5px;color:var(--muted);font-family:var(--mono);}
+  .feedback-box button{background:transparent;border:1px solid var(--line);color:var(--amber);border-radius:6px;padding:5px 9px;cursor:pointer;font-size:12px;}
+  .feedback-box button:hover{border-color:var(--amber);}
+  /* Authentication gate */
+  .auth-gate{position:fixed;inset:0;background:radial-gradient(circle at 30% 20%,#13203a,#0a0e17 60%);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;}
+  .auth-card{width:100%;max-width:400px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 24px 60px rgba(0,0,0,.5);}
+  .auth-brand{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .auth-brand .mark{width:34px;height:34px;border-radius:9px;background:radial-gradient(circle at 30% 30%,var(--trust),var(--brand));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:#04121a;}
+  .auth-brand h1{font-family:var(--display);font-size:17px;margin:0;}
+  .auth-brand .sub{font-size:11px;color:var(--muted);font-family:var(--mono);}
+  .auth-tabs{display:flex;gap:6px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:16px;}
+  .auth-tabs button{flex:1;background:transparent;border:none;color:var(--muted);padding:8px;border-radius:7px;font-weight:600;font-size:13px;cursor:pointer;}
+  .auth-tabs button.active{background:var(--brand);color:#fff;}
+  .auth-card form{display:flex;flex-direction:column;gap:10px;}
+  .auth-card input,.auth-card select{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:11px 13px;color:var(--text);font-size:14px;}
+  .auth-card input:focus,.auth-card select:focus{outline:none;border-color:var(--brand);}
+  .auth-submit{background:var(--brand);border:none;color:#fff;padding:11px;border-radius:9px;font-weight:600;cursor:pointer;font-size:14px;margin-top:4px;}
+  .auth-err{color:var(--danger);font-size:12px;min-height:16px;}
+  .auth-note{margin-top:14px;color:var(--muted);font-size:11px;font-family:var(--mono);line-height:1.5;}
+  .user-chip{display:none;align-items:center;gap:10px;font-size:12px;color:var(--muted);font-family:var(--mono);}
+  .user-chip button{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:6px 11px;border-radius:8px;font-size:12px;cursor:pointer;}
+  .composer button.mic{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:0 14px;font-size:15px;}
+  .composer button.mic.rec{background:var(--danger);border-color:var(--danger);color:#fff;animation:blink 1s infinite;}
+  .composer button.mic.off{opacity:.4;cursor:not-allowed;}
+  .app-footer{display:flex;gap:14px;justify-content:center;align-items:center;padding:7px 10px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);flex-shrink:0;}
+  .app-footer a{color:var(--muted);text-decoration:none;}
+  .app-footer a:hover{color:var(--text);text-decoration:underline;}
+  :focus-visible{outline:2px solid var(--trust);outline-offset:2px;border-radius:4px;}
   ::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
   @media (max-width:820px){.chat-layout{flex-direction:column;} .rail{max-width:100%;border-top:1px solid var(--line);}}
 </style>
 </head>
 <body>
+<div id="authGate" class="auth-gate">
+  <div class="auth-card">
+    <div class="auth-brand"><div class="mark">S</div><div><h1>Sentinel</h1><div class="sub">Autonomous Servicing Intelligence</div></div></div>
+    <div class="auth-tabs">
+      <button id="tabLogin" class="active" onclick="showAuthTab('login')">Sign in</button>
+      <button id="tabRegister" onclick="showAuthTab('register')">Create account</button>
+    </div>
+    <form id="loginForm" onsubmit="return submitLogin(event)">
+      <input id="loginEmail" type="email" placeholder="Email" aria-label="Email address" autocomplete="username" required>
+      <input id="loginPassword" type="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required>
+      <div class="auth-err" id="loginErr"></div>
+      <button class="auth-submit" type="submit">Sign in</button>
+    </form>
+    <form id="registerForm" style="display:none;" onsubmit="return submitRegister(event)">
+      <input id="regName" type="text" placeholder="Full name" aria-label="Full name" autocomplete="name">
+      <input id="regEmail" type="email" placeholder="Email" aria-label="Email address" autocomplete="username" required>
+      <input id="regPassword" type="password" placeholder="Password (8+ chars, letters &amp; numbers)" aria-label="Password" autocomplete="new-password" required>
+      <select id="regRole" aria-label="Account role">
+        <option value="cardmember">Cardmember</option>
+        <option value="supervisor">Supervisor</option>
+      </select>
+      <div class="auth-err" id="regErr"></div>
+      <button class="auth-submit" type="submit">Create account</button>
+    </form>
+    <div class="auth-note">Authentication is served by the local backend over /api/auth. Passwords are stored as PBKDF2-SHA256 hashes.</div>
+  </div>
+</div>
 <div class="app">
   <header>
     <div class="brand">
@@ -132,7 +206,9 @@
       <button class="active" data-view="chat">Customer Chat</button>
       <button data-view="dash">Supervisor Dashboard</button>
       <button data-view="audit">Audit Explorer</button>
+      <button data-view="timeline">Timeline Replay</button>
     </nav>
+    <div class="user-chip" id="userChip"><span id="userName"></span><button onclick="logout()">Sign out</button></div>
   </header>
   <div class="views">
     <div id="view-chat" class="view active">
@@ -147,8 +223,10 @@
             <button onclick="quickSend('Can I speak to a human agent?')">Talk to a human</button>
           </div>
           <div class="composer">
-            <input id="msgInput" type="text" placeholder="Type a servicing request…" onkeydown="if(event.key==='Enter')sendMessage()">
-            <button onclick="sendMessage()">Send</button>
+            <input id="msgInput" type="text" placeholder="Type a servicing request…" aria-label="Type a servicing request" onkeydown="if(event.key==='Enter')sendMessage()">
+            <button id="micBtn" class="mic" type="button" title="Voice input" aria-label="Start voice input" aria-pressed="false" onclick="toggleMic()">🎤</button>
+            <button id="speakBtn" class="mic" type="button" title="Toggle spoken replies" aria-label="Toggle spoken replies" aria-pressed="false" onclick="toggleSpeak()">🔊</button>
+            <button onclick="sendMessage()" aria-label="Send message">Send</button>
           </div>
         </div>
         <div class="rail" id="rail">
@@ -177,15 +255,43 @@
       <div id="verifyBanner" class="verify-banner"></div>
       <div class="chain" id="chainList"><div class="empty-state">No audit records yet.</div></div>
     </div>
+    <div id="view-timeline" class="view">
+      <div class="tl-head-row">
+        <div><h2>Timeline Replay</h2><p style="margin:0;color:var(--muted);font-size:12.5px;">Chronological replay of messages and audit events · GET /api/sessions/&lt;id&gt;/timeline</p></div>
+        <button onclick="renderTimeline()">Refresh</button>
+      </div>
+      <div class="tl-list" id="timelineList"><div class="empty-state">Start a conversation to build a timeline.</div></div>
+    </div>
   </div>
+  <footer class="app-footer">
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <span>Sentinel demo — not affiliated with American Express</span>
+  </footer>
 </div>
 
 <script>
-const API = ''; // same-origin — backend serves this file too
+/* =========================================================================
+   Sentinel frontend
+
+   Talk to the backend at the same origin. Everything shown here comes from a
+   real API response - no mock data. The reasoning rail, the supervisor
+   dashboard, the audit explorer, and the timeline all read live endpoints.
+   ========================================================================= */
+
+const API = '';  // same origin: this backend serves both the page and the API
 let sessionId = null;
+let lastProposal = null;
+let config = null;
+let authToken = null;      // bearer token, persisted in localStorage
+let currentUser = null;    // {id, email, name, role}
+let AUTH_ENABLED = false;
+let recognition = null, listening = false, speakReplies = false;
+
 const chatScroll = document.getElementById('chatScroll');
 const railContent = document.getElementById('railContent');
 
+/* ---------------- navigation ---------------- */
 document.querySelectorAll('nav button').forEach(b=>{
   b.addEventListener('click',()=>{
     document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
@@ -194,178 +300,303 @@ document.querySelectorAll('nav button').forEach(b=>{
     document.getElementById('view-'+b.dataset.view).classList.add('active');
     if(b.dataset.view==='dash') renderDashboard();
     if(b.dataset.view==='audit') renderAudit();
+    if(b.dataset.view==='timeline') renderTimeline();
   });
 });
 
-async function boot(){
-  const r = await fetch(API+'/api/sessions', {method:'POST'});
-  const d = await r.json();
-  sessionId = d.session_id;
-  addMsg('agent','Hi, I\'m Sentinel — American Express\'s AI servicing assistant, connected live to the backend at <code>localhost:8000</code>. Session <b>'+sessionId+'</b> started. What can I help you with today?', 'Orchestrator');
-}
-
+/* ---------------- helpers ---------------- */
 function scrollDown(){ chatScroll.scrollTop = chatScroll.scrollHeight; }
+
 function addMsg(role, html, tag){
   const div = document.createElement('div');
   div.className = 'msg '+role;
-  div.innerHTML = (tag ? `<span class="agent-tag">${tag}</span>` : '') + html;
+  div.innerHTML = (tag ? `<span class="agent-tag">${escapeHtml(tag)}</span>` : '') + html;
   chatScroll.appendChild(div); scrollDown(); return div;
 }
-function addSystem(text){ addMsg('system', text); }
+function addSystem(text){ addMsg('system', escapeHtml(text)); }
 function quickSend(text){ document.getElementById('msgInput').value = text; sendMessage(); }
-function escapeHtml(s){ return s.replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function escapeHtml(s){
+  return String(s === null || s === undefined ? '' : s)
+    .replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
 function confClass(c){ return c>=0.85?'conf-high':(c>=0.65?'conf-mid':'conf-low'); }
 function confColor(c){ return c>=0.85?'var(--trust)':(c>=0.65?'var(--amber)':'var(--danger)'); }
 function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
+function money(n){ return '$' + Number(n||0).toFixed(2); }
 
+async function api(path, options){
+  const opts = options || {};
+  const headers = Object.assign({}, opts.headers || {});
+  if(authToken) headers['Authorization'] = 'Bearer ' + authToken;
+  const res = await fetch(API + path, Object.assign({}, opts, { headers }));
+  let data = null;
+  try { data = await res.json(); } catch(e) { data = null; }
+  return { ok: res.ok, status: res.status, data };
+}
+
+/* ---------------- pipeline visualisation ---------------- */
 function pipelineCard(steps){
   const div = document.createElement('div');
   div.className = 'pipeline';
-  div.innerHTML = steps.map((s,i)=>`<div class="step" data-i="${i}"><span class="dot"></span>${s}</div>`).join('');
+  div.innerHTML = steps.map((s,i)=>`<div class="step" data-i="${i}"><span class="dot"></span>${escapeHtml(s)}</div>`).join('');
   chatScroll.appendChild(div); scrollDown(); return div;
 }
-async function animatePipeline(div, n, delay=350){
-  for(let i=0;i<n;i++){ await wait(delay); const el = div.querySelector(`.step[data-i="${i}"]`); if(el) el.classList.add('done'); scrollDown(); }
+async function animatePipeline(div, n, delay=320){
+  for(let i=0;i<n;i++){
+    await wait(delay);
+    const el = div.querySelector(`.step[data-i="${i}"]`);
+    if(el) el.classList.add('done');
+    scrollDown();
+  }
 }
 
-function updateRail({flow, confidence, policy, rationale}){
+/* ---------------- reasoning rail ---------------- */
+function updateRail({flow, confidence, policy, rationale, quality, sentiment, escalated}){
+  const pct = Math.round((confidence||0)*100);
+  const q = quality ? `<div class="kv"><span class="k">AI Quality</span><span>${quality.score}/100 (${quality.band})</span></div>` : '';
+  const s = sentiment && sentiment.label!=='neutral'
+    ? `<div class="kv"><span class="k">Sentiment</span><span style="color:var(--amber)">${escapeHtml(sentiment.label)} (${Math.round(sentiment.score*100)}%)</span></div>`
+    : '';
   railContent.innerHTML = `
     <div class="rail-card"><h4>Current Flow</h4>
-      <div class="kv"><span class="k">Intent</span><span>${flow}</span></div>
-      <div class="kv"><span class="k">Session</span><span>${sessionId}</span></div></div>
+      <div class="kv"><span class="k">Intent</span><span>${escapeHtml(flow||'—')}</span></div>
+      <div class="kv"><span class="k">Session</span><span>${escapeHtml(sessionId||'—')}</span></div>
+      ${escalated?'<div class="kv"><span class="k">Status</span><span style="color:var(--danger)">Escalated</span></div>':''}</div>
     <div class="rail-card"><h4>Confidence</h4>
-      <div class="conf-bar-wrap"><div class="conf-bar" style="width:${Math.round(confidence*100)}%;background:${confColor(confidence)}"></div></div>
-      <div class="kv"><span class="k">Score</span><span style="color:${confColor(confidence)}">${Math.round(confidence*100)}%</span></div></div>
-    <div class="rail-card"><h4>Policy Matched</h4><div class="rail-empty" style="color:var(--text)">${policy}</div></div>
-    <div class="rail-card"><h4>Why Sentinel Did This</h4><div class="rail-empty" style="color:var(--text)">${rationale}</div></div>
+      <div class="conf-bar-wrap"><div class="conf-bar" style="width:${pct}%;background:${confColor(confidence||0)}"></div></div>
+      <div class="kv"><span class="k">Score</span><span style="color:${confColor(confidence||0)}">${pct}%</span></div>
+      ${s}${q}</div>
+    <div class="rail-card"><h4>Policy Matched</h4><div class="rail-empty" style="color:var(--text)">${escapeHtml(policy||'—')}</div></div>
+    <div class="rail-card"><h4>Why Sentinel Did This</h4><div class="rail-empty" style="color:var(--text)">${escapeHtml(rationale||'—')}</div></div>
   `;
 }
 
+/* ---------------- chat ---------------- */
 async function sendMessage(){
   const input = document.getElementById('msgInput');
   const text = input.value.trim();
   if(!text || !sessionId) return;
+
+  const limit = config && config.max_message_chars ? config.max_message_chars : 4000;
+  if(text.length > limit){ addSystem('Message is too long (max '+limit+' characters).'); return; }
+
   input.value = '';
   addMsg('user', escapeHtml(text));
 
-  const pipe = pipelineCard(['Intent Agent classifying…','Risk Agent assessing…','Resolver Agent evaluating…','Explainability Agent generating rationale…','Policy Gateway checking…']);
+  const pipe = pipelineCard([
+    'Intent Agent classifying…',
+    'Risk Agent assessing…',
+    'Resolver Agent evaluating…',
+    'Explainability Agent generating rationale…',
+    'Policy Gateway checking…'
+  ]);
   await animatePipeline(pipe, 5);
 
-  const res = await fetch(API+'/api/sessions/'+sessionId+'/messages', {
+  const { ok, data } = await api('/api/sessions/'+sessionId+'/messages', {
     method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({text})
   });
-  const data = await res.json();
+
+  if(!ok || !data){
+    addSystem('The request failed. Is the backend still running?');
+    return;
+  }
 
   if(data.type === 'escalation'){
     const card = document.createElement('div');
     card.className = 'escalation-card';
     card.innerHTML = `<div class="et">Escalating to human agent</div>
-      <div class="eb"><b>Reason:</b> ${data.reason}<br>${data.rationale}</div>
+      <div class="eb"><b>Reason:</b> ${escapeHtml(data.reason)}<br>${escapeHtml(data.rationale)}</div>
       <div class="ctx-box">${escapeHtml(JSON.stringify(data.context, null, 2))}</div>`;
     chatScroll.appendChild(card); scrollDown();
-    updateRail({flow:'Escalation', confidence:data.audit.confidence, policy:data.audit.policy, rationale:data.rationale});
+    updateRail({
+      flow:'Escalation',
+      confidence: data.audit ? data.audit.confidence : data.confidence,
+      policy: data.audit ? data.audit.policy : 'ESCALATION-POLICY',
+      rationale: data.rationale,
+      quality: data.quality,
+      sentiment: data.context ? data.context.sentiment : null,
+      escalated: true
+    });
+    speak('Escalating you to a human agent. ' + data.reason);
+    renderTimeline();
     return;
   }
 
   if(data.type === 'proposal'){
+    lastProposal = data;
     const card = document.createElement('div');
     card.className = 'decision-card';
-    card.innerHTML = `<div class="dc-head"><div class="dc-title">${data.summary}</div><div class="conf-badge ${confClass(data.confidence)}">${Math.round(data.confidence*100)}% confidence</div></div>
-      <div class="dc-body">${data.rationale}${data.step_up_required ? '<br><br><i style="color:var(--muted)">Step-up authentication was required and completed for this action.</i>':''}</div>
-      <div class="dc-actions">
-        <button class="primary" onclick='confirmAction(this, ${JSON.stringify(data)})'>Confirm &amp; execute</button>
-        <button onclick="declineAction(this)">Not now</button>
-      </div>`;
+    card.innerHTML = `<div class="dc-head"><div class="dc-title">${escapeHtml(data.summary)}</div><div class="conf-badge ${confClass(data.confidence)}">${Math.round(data.confidence*100)}% confidence</div></div>
+      <div class="dc-body">${escapeHtml(data.rationale)}${data.step_up_required ? '<br><br><i style="color:var(--muted)">Step-up authentication was required and completed for this action.</i>':''}</div>
+      <div class="dc-actions"></div>`;
+
+    const actions = card.querySelector('.dc-actions');
+
+    const confirmBtn = document.createElement('button');
+    confirmBtn.className = 'primary';
+    confirmBtn.textContent = 'Confirm & execute';
+    confirmBtn.addEventListener('click', () => confirmAction(confirmBtn, data));
+    actions.appendChild(confirmBtn);
+
+    const declineBtn = document.createElement('button');
+    declineBtn.textContent = 'Not now';
+    declineBtn.addEventListener('click', () => declineAction(declineBtn));
+    actions.appendChild(declineBtn);
+
     chatScroll.appendChild(card); scrollDown();
-    updateRail({flow:data.intent, confidence:data.confidence, policy:data.policy, rationale:data.rationale});
+    updateRail({
+      flow: data.intent,
+      confidence: data.confidence,
+      policy: data.policy,
+      rationale: data.rationale,
+      quality: data.quality,
+      sentiment: data.sentiment
+    });
+    speak(data.summary + '. ' + data.rationale);
+    renderTimeline();
   }
 }
 
 async function confirmAction(btn, data){
-  const res = await fetch(API+'/api/actions/confirm', {
+  btn.disabled = true;
+  const { ok, status, data: result } = await api('/api/actions/confirm', {
     method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({session_id:sessionId, action:data.action, payload:data.payload, confidence:data.confidence, policy:data.policy, rationale:data.rationale})
+    body: JSON.stringify({
+      session_id: sessionId,
+      action: data.action,
+      payload: data.payload,
+      confidence: data.confidence,
+      policy: data.policy,
+      rationale: data.rationale
+    })
   });
-  const result = await res.json();
+
   const card = btn.closest('.decision-card');
-  card.querySelector('.dc-actions').innerHTML = `<div style="padding:6px 2px;color:var(--trust);font-size:12.5px;font-weight:600;">✓ Executed &amp; written to immutable audit log as ${result.audit.id}</div>`;
-  addSystem('Case '+sessionId+' updated · Audit record '+result.audit.id+' written to sentinel.db');
-}
-function declineAction(btn){
-  const card = btn.closest('.decision-card');
-  card.querySelector('.dc-actions').innerHTML = `<div style="padding:6px 2px;color:var(--muted);font-size:12.5px;">No changes were made.</div>`;
+  const slot = card.querySelector('.dc-actions');
+
+  if(!ok || !result || !result.audit){
+    // Previously this threw a TypeError and left the card stuck. Now the
+    // failure is shown to the user.
+    const message = result && result.error ? result.error : 'Execution failed ('+status+').';
+    slot.innerHTML = `<div style="padding:6px 2px;color:var(--danger);font-size:12.5px;font-weight:600;">✗ ${escapeHtml(message)}</div>`;
+    return;
+  }
+
+  slot.innerHTML = `<div style="padding:6px 2px;color:var(--trust);font-size:12.5px;font-weight:600;">✓ Executed &amp; written to immutable audit log as ${escapeHtml(result.audit.id)}</div>`;
+  addSystem('Case '+sessionId+' resolved · audit record '+result.audit.id+' written');
+  askFeedback();
+  renderTimeline();
+  renderDashboard();
 }
 
-/* ---------------- Dashboard ---------------- */
+async function declineAction(btn){
+  const card = btn.closest('.decision-card');
+  card.querySelector('.dc-actions').innerHTML =
+    `<div style="padding:6px 2px;color:var(--muted);font-size:12.5px;">No changes were made.</div>`;
+  await api('/api/actions/decline', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({session_id: sessionId})
+  });
+  renderTimeline();
+}
+
+/* ---------------- CSAT feedback ---------------- */
+function askFeedback(){
+  const box = document.createElement('div');
+  box.className = 'feedback-box';
+  box.innerHTML = `<span>How did we do?</span>`;
+  [1,2,3,4,5].forEach(n=>{
+    const b = document.createElement('button');
+    b.textContent = '★'.repeat(n);
+    b.title = n + ' out of 5';
+    b.addEventListener('click', async () => {
+      await api('/api/feedback', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({session_id: sessionId, rating: n})
+      });
+      box.innerHTML = `<span style="color:var(--trust)">Thanks — rated ${n}/5.</span>`;
+      renderDashboard();
+    });
+    box.appendChild(b);
+  });
+  chatScroll.appendChild(box); scrollDown();
+}
+/* ---------------- Supervisor Dashboard ---------------- */
 async function renderDashboard(){
-  const res = await fetch(API+'/api/dashboard/sessions');
-  const {sessions} = await res.json();
+  const { ok, data } = await api('/api/dashboard/sessions');
   const grid = document.getElementById('sessionGrid');
   const statRow = document.getElementById('statRow');
-  if(sessions.length === 0){
+  if(!ok || !data){ grid.innerHTML = '<div class="empty-state">Could not load sessions.</div>'; return; }
+  const sessions = data.sessions || [];
+  const stats = data.stats || {};
+  if(!sessions.length){
     grid.innerHTML = '<div class="empty-state">No sessions yet. Start a conversation in Customer Chat.</div>';
   } else {
     grid.innerHTML = sessions.map(s=>{
       const c = s.confidence==null ? 0 : s.confidence;
-      const cls = s.status==='Escalated' ? 'red' : (c>=0.85 ? 'green' : (c>=0.65 ? 'amber':'red'));
-      return `<div class="session-card ${cls}">
-        <div class="sc-top"><span>${s.id}</span><span>${new Date(s.created_at*1000).toLocaleTimeString()}</span></div>
-        <div class="sc-flow">${s.flow || 'Unclassified'}</div>
-        <div class="sc-status">${s.status}</div>
-        <div class="sc-conf">Confidence: ${s.confidence!=null ? Math.round(s.confidence*100)+'%' : '—'}</div>
-      </div>`;
+      const cls = s.status==='Escalated' ? 'red' : (s.status==='Declined' ? 'amber' : (c>=0.85 ? 'green' : (c>=0.65 ? 'amber':'red')));
+      const sentiment = s.sentiment ? ' · sentiment '+Math.round(s.sentiment*100)+'%' : '';
+      const quality = s.quality_score!=null ? ' · quality '+Math.round(s.quality_score) : '';
+      return '<div class="session-card '+cls+'">'+
+        '<div class="sc-top"><span>'+escapeHtml(s.id)+'</span><span>'+new Date(s.created_at*1000).toLocaleTimeString()+'</span></div>'+
+        '<div class="sc-flow">'+escapeHtml(s.flow || 'Unclassified')+'</div>'+
+        '<div class="sc-status">'+escapeHtml(s.status)+'</div>'+
+        '<div class="sc-conf">Confidence: '+(s.confidence!=null ? Math.round(s.confidence*100)+'%' + sentiment + quality : '—')+'</div>'+
+      '</div>';
     }).join('');
   }
-  const resolved = sessions.filter(s=>s.status==='Resolved').length;
-  const escalated = sessions.filter(s=>s.status==='Escalated').length;
-  const withConf = sessions.filter(s=>s.confidence!=null);
-  const avgConf = withConf.length ? Math.round(100*withConf.reduce((a,s)=>a+s.confidence,0)/withConf.length) : 0;
-  statRow.innerHTML = `
-    <div class="stat"><div class="n">${sessions.length}</div><div class="l">Total sessions</div></div>
-    <div class="stat"><div class="n">${resolved}</div><div class="l">Autonomously resolved</div></div>
-    <div class="stat"><div class="n">${escalated}</div><div class="l">Escalated to human</div></div>
-    <div class="stat"><div class="n">${avgConf}%</div><div class="l">Avg. confidence</div></div>
-  `;
+  statRow.innerHTML =
+    '<div class="stat"><div class="n">'+(stats.total_sessions||0)+'</div><div class="l">Total sessions</div></div>'+
+    '<div class="stat"><div class="n">'+(stats.resolved||0)+'</div><div class="l">Autonomously resolved</div></div>'+
+    '<div class="stat"><div class="n">'+(stats.escalated||0)+'</div><div class="l">Escalated to human</div></div>'+
+    '<div class="stat"><div class="n">'+(stats.resolution_rate||0)+'%</div><div class="l">Resolution rate</div></div>'+
+    '<div class="stat"><div class="n">'+(stats.avg_confidence!=null ? Math.round(stats.avg_confidence*100)+'%' : '—')+'</div><div class="l">Avg. confidence</div></div>'+
+    '<div class="stat"><div class="n">'+(stats.avg_quality!=null ? stats.avg_quality : '—')+'</div><div class="l">Avg. AI quality</div></div>'+
+    '<div class="stat"><div class="n">'+(stats.avg_rating!=null ? stats.avg_rating+'/5' : '—')+'</div><div class="l">Avg. customer rating</div></div>';
 }
-
-/* ---------------- Audit ---------------- */
+/* ---------------- Audit Explorer ---------------- */
 async function renderAudit(){
-  const res = await fetch(API+'/api/audit');
-  const {records} = await res.json();
+  const { ok, data } = await api('/api/audit');
   const list = document.getElementById('chainList');
-  document.getElementById('verifyBanner').className = 'verify-banner';
-  if(records.length===0){ list.innerHTML = '<div class="empty-state">No audit records yet.</div>'; return; }
-  list.innerHTML = records.map(e=>`
-    <div class="block" data-id="${e.id}" onclick="this.classList.toggle('open')">
-      <div class="b-top"><div class="b-title">${e.id} — ${e.action}</div><div class="b-time">${new Date(e.created_at*1000).toLocaleTimeString()}</div></div>
-      <div class="b-hash">prev: ${e.prev_hash.slice(0,16)}… → hash: <b>${e.hash.slice(0,16)}…</b></div>
-      <div class="b-detail">
-        <div><b>Session:</b> ${e.session_id}</div>
-        <div><b>Confidence:</b> ${Math.round(e.confidence*100)}%</div>
-        <div><b>Policy:</b> ${e.policy||'—'}</div>
-        <div><b>Payload:</b> ${escapeHtml(JSON.stringify(e.payload))}</div>
-        <div><b>Full hash:</b> ${e.hash}</div>
-        <div style="margin-top:6px;"><button onclick="event.stopPropagation();tamperOne('${e.id}')" style="background:transparent;border:1px solid var(--danger);color:var(--danger);border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;">Tamper this record</button></div>
-      </div>
-    </div>
-  `).join('');
+  if(!ok || !data){ list.innerHTML = '<div class="empty-state">Could not load the audit log.</div>'; return; }
+  const records = data.records || [];
+  if(!records.length){ list.innerHTML = '<div class="empty-state">No audit records yet. Resolve a case to create one.</div>'; return; }
+  list.innerHTML = records.map(e=>{
+    const tamperBtn = window.DEMO_MODE
+      ? '<div style="margin-top:6px;"><button onclick="event.stopPropagation();tamperOne(\''+escapeHtml(e.id)+'\')" style="background:transparent;border:1px solid var(--danger);color:var(--danger);border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;">Tamper this record</button></div>'
+      : '';
+    return '<div class="block" data-id="'+escapeHtml(e.id)+'" onclick="this.classList.toggle(\'open\')">'+
+      '<div class="b-top"><div class="b-title">'+escapeHtml(e.id)+' — '+escapeHtml(e.action)+'</div><div class="b-time">'+new Date(e.created_at*1000).toLocaleTimeString()+'</div></div>'+
+      '<div class="b-hash">prev: '+escapeHtml(e.prev_hash.slice(0,16))+'… → hash: <b>'+escapeHtml(e.hash.slice(0,16))+'…</b></div>'+
+      '<div class="b-detail">'+
+        '<div><b>Session:</b> '+escapeHtml(e.session_id)+'</div>'+
+        '<div><b>Confidence:</b> '+Math.round((e.confidence||0)*100)+'%</div>'+
+        '<div><b>Policy:</b> '+escapeHtml(e.policy||'—')+'</div>'+
+        '<div><b>Payload:</b> '+escapeHtml(JSON.stringify(e.payload))+'</div>'+
+        '<div><b>Full hash:</b> '+escapeHtml(e.hash)+'</div>'+
+        tamperBtn+
+      '</div></div>';
+  }).join('');
 }
 async function tamperOne(id){
-  await fetch(API+'/api/audit/tamper', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({audit_id:id})});
+  const { ok, data } = await api('/api/audit/tamper', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({audit_id:id})
+  });
+  if(!ok){ addSystem('Tamper rejected: ' + ((data&&data.error)||'unknown error')); }
   renderAudit();
 }
 async function tamperChain(){
-  const res = await fetch(API+'/api/audit');
-  const {records} = await res.json();
-  if(records.length===0) return;
-  const mid = records[Math.floor(records.length/2)];
-  await tamperOne(mid.id);
+  const { data } = await api('/api/audit');
+  const records = data && data.records ? data.records : [];
+  if(!records.length){ addSystem('Nothing to tamper with yet.'); return; }
+  await tamperOne(records[Math.floor(records.length/2)].id);
 }
 async function verifyChain(){
-  const res = await fetch(API+'/api/audit/verify');
-  const data = await res.json();
+  const { ok, data } = await api('/api/audit/verify');
   const banner = document.getElementById('verifyBanner');
-  if(data.count===0){ banner.className='verify-banner'; return; }
+  if(!ok || !data){ banner.className='verify-banner'; return; }
+  if(data.count===0){ banner.className='verify-banner'; banner.textContent=''; return; }
   if(data.ok){
     banner.className = 'verify-banner ok';
     banner.textContent = '✓ Chain verified — all '+data.count+' records intact, no tampering detected. (Recomputed server-side via SHA-256.)';
@@ -375,8 +606,195 @@ async function verifyChain(){
   }
   renderAudit();
 }
+/* ---------------- Timeline Replay ---------------- */
+async function renderTimeline(){
+  if(!sessionId) return;
+  const host = document.getElementById('timelineList');
+  if(!host) return;
+  const { ok, data } = await api('/api/sessions/'+sessionId+'/timeline');
+  if(!ok || !data){ host.innerHTML = '<div class="empty-state">Could not load the timeline.</div>'; return; }
+  const events = data.timeline || [];
+  if(!events.length){ host.innerHTML = '<div class="empty-state">No events for this session yet.</div>'; return; }
+  host.innerHTML = events.map(e=>{
+    const time = new Date(e.at*1000).toLocaleTimeString();
+    const kind = e.kind === 'audit' ? 'audit' : e.role;
+    return '<div class="tl-item '+kind+'">'+
+      '<div class="tl-dot"></div>'+
+      '<div class="tl-body">'+
+        '<div class="tl-head"><span class="tl-kind">'+escapeHtml(kind)+'</span><span class="tl-time">'+time+'</span></div>'+
+        '<div class="tl-text">'+escapeHtml(e.text)+'</div>'+
+        (e.audit_id ? '<div class="tl-meta">'+escapeHtml(e.audit_id)+' · '+Math.round((e.confidence||0)*100)+'% · '+escapeHtml(e.policy||'')+'</div>' : '')+
+      '</div></div>';
+  }).join('');
+}
+/* ---------------- authentication ---------------- */
+function setToken(t){
+  authToken = t || null;
+  try { authToken ? localStorage.setItem('sentinel_token', authToken) : localStorage.removeItem('sentinel_token'); } catch(e){}
+}
+function storedToken(){ try { return localStorage.getItem('sentinel_token'); } catch(e){ return null; } }
+function showAuthGate(show){ document.getElementById('authGate').style.display = show ? 'flex' : 'none'; }
+function showAuthTab(which){
+  const login = which === 'login';
+  document.getElementById('loginForm').style.display = login ? 'flex' : 'none';
+  document.getElementById('registerForm').style.display = login ? 'none' : 'flex';
+  document.getElementById('tabLogin').classList.toggle('active', login);
+  document.getElementById('tabRegister').classList.toggle('active', !login);
+}
+function setErr(id, msg){ document.getElementById(id).textContent = msg || ''; }
 
+async function submitLogin(ev){
+  ev.preventDefault();
+  setErr('loginErr','');
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const { ok, data } = await api('/api/auth/login', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ email, password })
+  });
+  if(!ok || !data || !data.token){ setErr('loginErr', (data && data.error) || 'Sign-in failed.'); return false; }
+  setToken(data.token); currentUser = data.user; enterApp(); return false;
+}
+
+async function submitRegister(ev){
+  ev.preventDefault();
+  setErr('regErr','');
+  const payload = {
+    name: document.getElementById('regName').value.trim(),
+    email: document.getElementById('regEmail').value.trim(),
+    password: document.getElementById('regPassword').value,
+    role: document.getElementById('regRole').value
+  };
+  const { ok, data } = await api('/api/auth/register', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(payload)
+  });
+  if(!ok || !data || !data.token){ setErr('regErr', (data && data.error) || 'Registration failed.'); return false; }
+  setToken(data.token); currentUser = data.user; enterApp(); return false;
+}
+
+function logout(){
+  api('/api/auth/logout', { method:'POST' }).catch(()=>{});
+  setToken(null); currentUser = null; sessionId = null;
+  location.reload();
+}
+
+function applyRole(){
+  const supervisor = !AUTH_ENABLED || (currentUser && (currentUser.role==='supervisor' || currentUser.role==='admin'));
+  let activeHidden = false;
+  document.querySelectorAll('nav button').forEach(b=>{
+    const restricted = b.dataset.view==='dash' || b.dataset.view==='audit';
+    if(restricted) b.style.display = supervisor ? '' : 'none';
+    if(restricted && !supervisor && b.classList.contains('active')) activeHidden = true;
+  });
+  if(activeHidden){
+    const chat = document.querySelector('nav button[data-view="chat"]');
+    if(chat) chat.click();
+  }
+}
+
+function startGreeting(){
+  const name = (currentUser && currentUser.name) ? currentUser.name : 'there';
+  addMsg('agent',
+    'Hi ' + escapeHtml(name) + " — I'm Sentinel, American Express's AI servicing assistant, live on the local backend. What can I help you with today?",
+    'Orchestrator');
+}
+
+/* ---------------- voice support ---------------- */
+function renderVoiceSupport(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const mic = document.getElementById('micBtn');
+  if(!SR){ mic.disabled = true; mic.classList.add('off'); mic.title = 'Voice input is not supported in this browser'; }
+  if(!('speechSynthesis' in window)){
+    const sb = document.getElementById('speakBtn');
+    sb.disabled = true; sb.classList.add('off'); sb.title = 'Spoken replies are not supported in this browser';
+  }
+}
+function toggleMic(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR) return;
+  const mic = document.getElementById('micBtn');
+  if(listening && recognition){ recognition.stop(); return; }
+  recognition = new SR();
+  recognition.lang = 'en-US'; recognition.interimResults = false; recognition.maxAlternatives = 1;
+  recognition.onresult = (e)=>{
+    const transcript = (e.results && e.results[0] && e.results[0][0].transcript) || '';
+    const input = document.getElementById('msgInput');
+    input.value = (input.value ? input.value + ' ' : '') + transcript;
+    sendMessage();
+  };
+  recognition.onend = ()=>{ listening = false; mic.classList.remove('rec'); mic.setAttribute('aria-pressed','false'); };
+  recognition.onerror = ()=>{ listening = false; mic.classList.remove('rec'); mic.setAttribute('aria-pressed','false'); };
+  listening = true; mic.classList.add('rec'); mic.setAttribute('aria-pressed','true');
+  try { recognition.start(); } catch(e){ listening = false; mic.classList.remove('rec'); }
+}
+function toggleSpeak(){
+  if(!('speechSynthesis' in window)) return;
+  speakReplies = !speakReplies;
+  const sb = document.getElementById('speakBtn');
+  sb.classList.toggle('rec', speakReplies);
+  sb.setAttribute('aria-pressed', speakReplies ? 'true' : 'false');
+  sb.title = 'Spoken replies: ' + (speakReplies ? 'on' : 'off');
+  if(!speakReplies) window.speechSynthesis.cancel();
+}
+function speak(text){
+  if(!speakReplies || !text || !('speechSynthesis' in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(String(text)));
+  } catch(e){}
+}
+
+function enterApp(){
+  showAuthGate(false);
+  renderVoiceSupport();
+  applyRole();
+  const chip = document.getElementById('userChip');
+  if(currentUser){
+    chip.style.display = 'flex';
+    document.getElementById('userName').textContent = (currentUser.name || currentUser.email) + ' · ' + currentUser.role;
+  }
+  startGreeting();
+}
+
+/* ---------------- boot ---------------- */
+async function boot(){
+  const { ok, data } = await api('/api/config');
+  if(ok && data){ config = data; }
+  window.DEMO_MODE = config ? !!config.demo_mode : false;
+  AUTH_ENABLED = config ? !!config.auth_enabled : false;
+  if(!window.DEMO_MODE){
+    document.querySelectorAll('.tamper').forEach(el=>{ el.style.display='none'; });
+  }
+
+  if(AUTH_ENABLED){
+    setToken(storedToken());
+    showAuthGate(true);
+    if(authToken){
+      const me = await api('/api/auth/me');
+      if(me.ok && me.data && me.data.user){ currentUser = me.data.user; enterApp(); return; }
+      setToken(null);
+    }
+    return;
+  }
+  enterApp();
+}
+// Sessions are created lazily on the first message. Creating one on page load
+// filled the supervisor dashboard with empty rows.
+async function ensureSession(){
+  if(sessionId) return sessionId;
+  const { ok, data } = await api('/api/sessions', { method:'POST' });
+  if(ok && data && data.session_id) sessionId = data.session_id;
+  return sessionId;
+}
+const _send = sendMessage;
+sendMessage = async function(){
+  await ensureSession();
+  if(!sessionId){ addSystem('Could not start a session. Is the backend running?'); return; }
+  return _send();
+};
 boot();
+
 </script>
 </body>
 </html>
